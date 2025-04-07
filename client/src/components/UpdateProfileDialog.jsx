@@ -22,6 +22,8 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         skills: user?.profile?.skills?.map(skill => skill) || "",
         file: user?.profile?.resume || ""
     });
+
+
     const dispatch = useDispatch();
 
     const changeEventHandler = (e) => {
@@ -94,9 +96,10 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                                     id="email"
                                     name="email"
                                     type="email"
+                                    disabled
                                     value={input.email}
                                     onChange={changeEventHandler}
-                                    className="col-span-3"
+                                    className="col-span-3 bg-gray-300"
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>
@@ -104,9 +107,10 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                                 <Input
                                     id="number"
                                     name="number"
+                                    disabled
                                     value={input.phoneNumber}
                                     onChange={changeEventHandler}
-                                    className="col-span-3"
+                                    className="col-span-3 bg-gray-300"
                                 />
                             </div>
                             <div className='grid grid-cols-4 items-center gap-4'>

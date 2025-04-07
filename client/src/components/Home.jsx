@@ -23,7 +23,7 @@ const Home = () => {
       <Navbar />
       <HeroSection />
       {/* <CategoryCarousel /> */}
-      <HomePageSteps />
+      { !user && <HomePageSteps />}
       <LatestJobs />
       <Footer />
     </div>
