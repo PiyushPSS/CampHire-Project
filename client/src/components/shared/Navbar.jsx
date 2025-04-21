@@ -2,7 +2,7 @@ import React from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { Avatar, AvatarImage } from "../ui/avatar";
-import { LogOut, User2 } from "lucide-react";
+import { Brain, LogOut, User2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -33,12 +33,14 @@ const Navbar = () => {
 
   const isHome = window.location.pathname === "/";
 
+  const [searchQuery, setSearchQuery] = React.useState("");
+
   return (
     <div className={isHome ? "bg-[#cbcfff] pb-6" : "bg-[#fcfcfc] pb-6"}>
       <div className="flex items-center justify-between mx-auto max-w-7xl pt-10">
         <div>
           <Link to="/">
-            <h1 className="font-canvaSans font-bold text-[35px]">camphire.</h1>
+            <h1 className="font-canvaSans font-bold text-[35px]">campHire.</h1>
           </Link>
         </div>
         <div className="flex items-center gap-12 justify-center">
@@ -64,8 +66,29 @@ const Navbar = () => {
                       type="text"
                       className="rounded-full border-2 border-gray-300 py-2 px-4 w-[500px] focus:outline-none focus:ring-2 font-canvaSans font-normal focus:ring-indigo-500 hover:shadow-md"
                       placeholder="Search jobs..."
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          navigate("/browse", { state: searchQuery });
+                        }
+                      }}
+                      value={searchQuery}
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck="false"
+                      autoFocus={false}
+                      required={false}
+                      disabled={false}
+                      readOnly={false}
+
                     />
-                    <button className="absolute right-2 top-1/2 transform pr-2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+
+
+                    <button className="absolute right-2 top-1/2 transform pr-2 -translate-y-1/2 text-gray-500 hover:text-gray-700" onClick={() => {
+                      navigate("/browse", { state: searchQuery });
+                      setSearchQuery("");
+                    }}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5"
@@ -126,6 +149,16 @@ const Navbar = () => {
                     </div>
                   </div>
                   <div className="flex flex-col my-2 text-gray-600">
+
+                  <div className="flex w-fit items-center gap-2 cursor-pointer">
+                      <Brain />
+                      <Button variant="link">
+                        {" "}
+                        <Link to="https://kiet698.examly.io/login" target="_blank">Take Test</Link>
+                      </Button>
+                    </div>
+
+
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <User2 />
                       <Button variant="link">
