@@ -75,7 +75,6 @@ export const getAppliedJobs = async (req, res) => {
     console.log(error);
   }
 };
-// admin dekhega kitna user ne apply kiya hai
 export const getApplicants = async (req, res) => {
   try {
     const jobId = req.params.id;
@@ -132,3 +131,27 @@ export const updateStatus = async (req, res) => {
     console.log(error);
   }
 };
+
+
+export const allApplicantsReport = async (req, res) => {
+  try {
+    const applications = await Application.find({}).populate([
+      { path: "applicant" },
+      { path: "job" },
+    ]);
+
+    if (!applications) {
+      return res.status(404).json({
+        message: "Application not found.",
+        success: false,
+      });
+    } 
+    
+    return res.status(200).json({
+      applications,
+      success: true,
+    })
+  } catch(error) {
+    console.log(error);
+  }
+}

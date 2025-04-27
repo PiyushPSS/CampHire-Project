@@ -9,6 +9,7 @@ import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { setUser } from "@/redux/authSlice";
 import { toast } from "sonner";
+import SearchComponent from "../SearchComponent";
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.auth);
@@ -40,7 +41,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between mx-auto max-w-7xl pt-10">
         <div>
           <Link to="/">
-            <h1 className="font-canvaSans font-bold text-[35px]">campHire.</h1>
+            <h1 className="font-canvaSans font-bold text-[35px]">CampHire.</h1>
           </Link>
         </div>
         <div className="flex items-center gap-12 justify-center">
@@ -61,7 +62,7 @@ const Navbar = () => {
                                     <li><Link to="/browse">browse</Link></li> */}
 
                 <li>
-                  <div className="relative">
+                  {/* <div className="relative">
                     <input
                       type="text"
                       className="rounded-full border-2 border-gray-300 py-2 px-4 w-[500px] focus:outline-none focus:ring-2 font-canvaSans font-normal focus:ring-indigo-500 hover:shadow-md"
@@ -102,6 +103,9 @@ const Navbar = () => {
                         />
                       </svg>
                     </button>
+                  </div> */}
+                  <div className="flex justify-center">
+                    <SearchComponent navigate={navigate} />
                   </div>
                 </li>
               </>
@@ -149,15 +153,18 @@ const Navbar = () => {
                     </div>
                   </div>
                   <div className="flex flex-col my-2 text-gray-600">
-
-                  <div className="flex w-fit items-center gap-2 cursor-pointer">
+                    <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <Brain />
                       <Button variant="link">
                         {" "}
-                        <Link to="https://kiet698.examly.io/login" target="_blank">Take Test</Link>
+                        <Link
+                          to="https://kiet698.examly.io/login"
+                          target="_blank"
+                        >
+                          Take Test
+                        </Link>
                       </Button>
                     </div>
-
 
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <User2 />

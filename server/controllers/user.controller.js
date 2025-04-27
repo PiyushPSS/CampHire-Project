@@ -151,7 +151,6 @@ export const updateProfile = async (req, res) => {
     if (bio) user.profile.bio = bio;
     if (skills) user.profile.skills = skillsArray;
 
-
     const file = req.file;
     if (file) {
       //cloudnary upload
@@ -187,3 +186,22 @@ export const updateProfile = async (req, res) => {
     console.log(error);
   }
 };
+
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}).select("-password").sort({ createdAt: -1 });
+    if (!users) {
+      return res.status(404).json({
+        message: "Users not found.",
+        success: false,
+      });
+    }
+    return res.status(200).json({
+      users,
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}

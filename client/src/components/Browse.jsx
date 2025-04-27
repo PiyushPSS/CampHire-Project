@@ -10,7 +10,9 @@ import { useLocation } from "react-router-dom";
 
 const Browse = () => {
   const location = useLocation();
-  const searchQuery = location.state;
+  // const searchQuery = location.state;
+  const searchQuery = location.state?.jobTitle || "";
+  const locationQuery = location.state?.location || "";
 
   useGetAllJobs();
   const { allJobs } = useSelector((store) => store.job);
